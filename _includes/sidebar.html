@@ -10,7 +10,30 @@
 
   <nav class="sidebar-nav">
     <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}/">Home</a>
+    <span class="sidebar-nav-item">Ting's Links</span>
 
+        <ul>
+          {% if site.github_username %}         
+            <a href="https://github.com/star32134212">
+              <i class="fa fa-github"></i> GitHub
+            </a>       
+          {% endif %} 
+        </ul>
+        <ul>  
+          {% if site.twitter_username %}
+            <a href="https://twitter.com/star32134212">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+          {% endif %}      
+        </ul>
+        <ul>  
+          {% if site.instagram_username %}
+            <a href="https://www.instagram.com/orangekutar/">
+              <i class="fa fa-instagram"></i> Instagram
+            </a>
+          {% endif %}        
+        </ul>
+      <!-- Categories -->    
     {% comment %}
       The code below dynamically generates a sidebar nav of pages with
       `layout: page` in the front-matter. See readme for usage.
