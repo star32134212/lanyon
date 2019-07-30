@@ -6,7 +6,7 @@ permalink:           pretty
 # Setup
 title:               Orange Blog
 tagline:             '橘子的Blog'
-description:         'An orange'
+description:         '隨便寫寫～'
 url:                 https://star32134212.github.io/OrangeBlog/
 baseurl:             '/OrangeBlog'
 paginate:            5
