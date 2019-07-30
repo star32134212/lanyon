@@ -3,7 +3,7 @@
 
   {% include head.html %}
 
-  <body class = "theme-base-09">
+  <body class = "theme-base-0f">
 
     {% include sidebar.html %}
 
@@ -24,6 +24,15 @@
       </div>
     </div>
 
+    <div class="foot" align="center">
+      {% if site.github_username %}
+        <a href="https://github.com/{{ site.github_username }}">
+          <i class="fa fa-github"></i>
+        </a>       
+      {% endif %}
+
+     </div>
+
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
     <script>
@@ -43,5 +52,7 @@
         }, false);
       })(document);
     </script>
-  </body>
+  <!-- a new tab for external URL  -->
+  <script type="text/javascript" src="{{ site.baseurl }}/assets/js/new-tab.js"></script>
+</body>
 </html>
