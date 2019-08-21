@@ -19,9 +19,6 @@ layout: default
   <br>
   {{ content }}
   
-{% if site.disqus.shortname %}
-  {% include disqus_comments.html %}
-{% endif %}
 </div>
 
   <div class="related">
@@ -41,3 +38,6 @@ layout: default
       {% endfor %}
     </div>
 </div>
+{% if site.disqus.shortname %}
+  {% include disqus_comments.html %}
+{% endif %}
