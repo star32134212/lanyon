@@ -34,7 +34,8 @@ collections:
   tag:
     output: true
 
-comments :
-  provider : disqus    
-  disqus :
-    short_name : OrangeBlog
+# Disqus Comments
+disqus:
+    # Leave shortname blank to disable comments site-wide.
+    # Disable comments for any post by adding `comments: false` to that post's YAML Front Matter.
+    shortname: 
