@@ -33,3 +33,17 @@ facebook_username:    姜林寬
 collections:
   tag:
     output: true
+
+comments :
+  provider : disqus    
+  disqus :
+    short_name : OrangeBlog
+  livefyre :
+    site_id : 123
+  intensedebate :
+    account : 123abc
+  facebook :
+    appid : 123
+    num_posts: 5
+    width: 580
+    colorscheme: light
