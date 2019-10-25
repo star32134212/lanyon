@@ -6,7 +6,6 @@ tags:
 ---
 
 大四上修了很硬的計算機系統管理，作業二要寫shell script，沒注意到可以用bash等其他shell languages，於是用了最基本的sh來寫，應該是大學裡寫最久的一次個人作業吧:)  
-[作業連結](https://github.com/star32134212/CSA_note/tree/master/HW2/HW2-2)
 
 Main menu
 ===
@@ -220,3 +219,5 @@ cdto(){
 }
 ```
 作業還有要求如果是目錄的話，就要進到那個目錄再顯示該目錄底下的檔案，誤打誤撞發現直接寫一個新函數包一個`cd`就解決了。  
+
+[作業連結](https://github.com/star32134212/CSA_note/tree/master/HW2/HW2-2)
