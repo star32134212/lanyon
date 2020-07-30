@@ -7,7 +7,6 @@ tags:
 > 論文作者：Mathy Vanhoef、Frank Piessens  
 > 中文筆記整理：Orange  
  
-## 摘要
 Mathy Vanhoef和Frank Piessens找出了現行Wifi通訊的重大漏洞，設計了KRACKs(Key Re-installation Attack)攻擊可以解密傳送的密文。針對各種裝置的通訊架構作者提出了各種實現KRACKs的攻擊方法。  
 
 ---
