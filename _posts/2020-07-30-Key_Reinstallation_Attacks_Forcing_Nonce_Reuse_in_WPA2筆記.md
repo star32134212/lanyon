@@ -4,10 +4,8 @@ title: Key Reinstallation Attacks - Forcing Nonce Reuse in WPA2 筆記
 tags: 
   - "tech"
 ---    
-
-# Key Reinstallation Attacks: Forcing Nonce Reuse in WPA2 筆記
-> 論文作者：Mathy Vanhoef、Frank Piessens 
-> 中文筆記整理：Orange
+> 論文作者：Mathy Vanhoef、Frank Piessens  
+> 中文筆記整理：Orange  
  
 ## 摘要
 Mathy Vanhoef和Frank Piessens找出了現行Wifi通訊的重大漏洞，設計了KRACKs(Key Re-installation Attack)攻擊可以解密傳送的密文。針對各種裝置的通訊架構作者提出了各種實現KRACKs的攻擊方法。  
@@ -45,7 +43,7 @@ CCMP主要分兩塊，分别是CTR mode和CBC-MAC mode。CTR mode是加密算法
 
 ## 解釋各種會用到的Key
 下圖為一個AP所擁有的Key和分級：  
-![](https://i.imgur.com/kgxNp0q.png =450x)  
+![](https://i.imgur.com/kgxNp0q.png){:height="300" width="400"}    
 
 ### MSK (Master Session Key)
 由802.1X/EAP或PSK身分認證後生成的第一個密鑰。每個AP有獨立的MSK，MSK是用來生成GMK和PMK的，如果WPA沒有開啟PSA模式，而是安裝Radius伺服器，要用WPA/WPA2，那PMK就完全是由MSK產生的，應該會是[MSK的前256 bit](https://blog.csdn.net/lee244868149/article/details/52743302)。  
@@ -86,7 +84,7 @@ GMK用來生成GTK，給所有連接到此AP的STA共享。
 
 ## 四向交握（4-way Handshak）基本原理
 4-way Handshak中的所有msg皆使用EAPOL的框架實作，這是一種廣泛使用在無線網路通訊的框架。  
-![](https://i.imgur.com/j2aPBwP.png =400x)  
+![](https://i.imgur.com/j2aPBwP.png)  
 
 * header定義了此EAPOL在四向交握中的msg類型，ex：msg1 msg2
 * replay counter在每次傳送EAPOL FRAME時作為計數器增加
@@ -94,7 +92,7 @@ GMK用來生成GTK，給所有連接到此AP的STA共享。
 
 以`MsgN(r, Nonce; GTK)`為例，header是MsgN，replay counter是r，可能會有Nonce也可能不需要，`;`後面存在key data field，GTK用KEK加密。  
 
-![](https://i.imgur.com/Obi9tlp.png =400x)  
+![](https://i.imgur.com/Obi9tlp.png){:height="400" width="300"}      
 
 
 簡單版：  
@@ -108,7 +106,7 @@ GMK用來生成GTK，給所有連接到此AP的STA共享。
 
 詳細版：  
 STA進入PTK-INIT階段，產生PMK，AP把自己算出的ANonce給STA。收到後，STA進入PTK-START階段，自己也算一把 SNonce，然後用SNonce算出PTK，把SNonce/PTK附上MIC發給AP，AP收到SNonce，也可以算出PTK來比對，沒問題之後就把 用GMK產生GTK，連著MIC一起發給STA，STA收到訊息後先檢查是否有問題。如果合法，就進入PTK-NEGOTIATING階段，安裝PTK和GTK，然後和AP說裝好了，進入PTK-DONE階段。AP收到裝好的訊息後，安裝這個STA的PTK。完成之後，開啟port，雙方就可以用 802.1x 做通訊。  
-![](https://i.imgur.com/CrcL5qW.png =400x)  
+![](https://i.imgur.com/CrcL5qW.png){:height="400" width="300"}     
 
 ---
 
@@ -128,11 +126,11 @@ c2 = m2 xor P(k)
 3.有些系統只允許在PTK安裝後進行加密傳輸，代表在傳送GTK時不用另外加密，所以沒有利用counter的機會，不過作者仍提出了可以繞過這個問題的方法。  
 
 ### Plaintext Retransmission of message 3 
-![](https://i.imgur.com/upcIdCE.png =400x)  
+![](https://i.imgur.com/upcIdCE.png){:height="400" width="300"}     
 這種類型是安裝了PTK後仍然接受未被加密過的Msg3訊息，MitM直接擋Msg4就可以了。  
 
 ### Encrypted Retransmission of message 3 
-![](https://i.imgur.com/XVrBpcr.png =350x)![](https://i.imgur.com/SsqOmkR.png =350x)  
+![](https://i.imgur.com/XVrBpcr.png){:height="400" width="300"}![](https://i.imgur.com/SsqOmkR.png){:height="400" width="300"}     
 這種類型是只要STA安裝了PTK就只接受PTK加密過的訊息，如左圖，MitM可以直接攔截Msg3，讓AP發好幾個Msg3，然後再一次丟給STA，STA收到一堆Msg3會排進receive queue，處理第一個Msg3的時候安裝PTK並回傳Msg4，然後處理第二個時又被要求再安裝一次PTK，以此類推。這種方法是利用CPU和NIC的race conditions原理。  
 
 右圖是在講nonce的變動，第一個msg3讓STA安裝了PTK，假設此時nonce=0，然後用這個nonce=0去回傳msg4，接著處理第二個，這種只接收加密訊息的系統不會去檢查加密的鑰匙是否對不對，只要有加密就好，第二個msg3用的nonce=1，有加密就收，然後執行裡面帶的指令，是安裝PTK，所以又安裝了一次，nonce歸0，然後回傳msg4，此時nonce++變成1，以此類推，每次都用新的PTK回傳msg4，而且nonce都是1。  
@@ -144,7 +142,7 @@ c2 = m2 xor P(k)
 ## KRACKs-針對GTK
 要針對GTK攻擊有兩個條件，第一個是STA在重新安裝GTK後會刷新replay counter，第二個是要能攔截到目標STA會收的msg1且裡面已經包含目前AP正在使用的GTK。AP每過一段時間就重新算一個GTK，有的會延後安裝，等到所有STA都安裝好並回傳msg2時才安裝新的GTK。為了讓正在使用的STA這個群體獨立出來，AP會在有STA離開時就更新一次GTK，為的就是只有正在使用的這群用戶共享，因此可以透過假裝要離開的請求騙AP更新GTK。  
 
-![](https://i.imgur.com/Wm7oAsM.png =350x)![](https://i.imgur.com/OFmQc2D.png =350x)  
+![](https://i.imgur.com/Wm7oAsM.png){:height="400" width="300"}![](https://i.imgur.com/OFmQc2D.png){:height="400" width="300"}     
 
 ### Attacking Immediate Key Installation 
 左圖是AP直接安裝GTK的情況，把STA通知完成安裝GTK的msg2攔截，AP重發msg1，一樣把這個msg攔截，此時因為AP不延後安裝，他已經安裝好GTK了，開始廣播他要通知給各STA的資料，STA因為有安裝好GTK，也可以讀到這段資料，然後再把重發的msg1傳給STA，對STA來說他不知道這個msg1是補發的，把它當作AP又要求大家更新GTK，於是用剛才接收到的廣播資訊算出了新的GTK，以此類推可以讓STA重複安裝GTK。  
@@ -159,7 +157,7 @@ c2 = m2 xor P(k)
 
 ## KRACKs-針對 802.11R FT HANDSHAKE 
 [IEEE802.11r-2008](https://zh.wikipedia.org/wiki/IEEE_802.11r-2008)，又稱為快速BSS切換，也稱快速漫遊，目標是在解決使用者從一個AP移動到另一個AP的漫遊可以快速轉換。  
-![](https://i.imgur.com/kNyLWLI.png =350x)  
+![](https://i.imgur.com/kNyLWLI.png){:height="400" width="300"}   
 正常的快速漫遊過程如上圖的第1部分，AuthReq和AuthResp在功能上就和四向交握中的msg1和msg2一樣，且他們帶著Nonce可以產生fresh session key，ReassoReq和ReassoResp在功能上和msg3和msg4一樣，最終可以算出PTK和GTK並安裝。  
 
 和四向交握不同的是FT**只有兩個msg有用到MIC**且**不需使用到replay counters**，也因此**PTK必須是在STA回應的訊息確實被送到AP時才安裝**，因此**雖然AuthReq完和AuthResp完就有能力裝PTK了也會等到最後握完才和GTK一起裝**。  
