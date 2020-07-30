@@ -92,7 +92,7 @@ GMK用來生成GTK，給所有連接到此AP的STA共享。
 
 以`MsgN(r, Nonce; GTK)`為例，header是MsgN，replay counter是r，可能會有Nonce也可能不需要，`;`後面存在key data field，GTK用KEK加密。  
 
-![](https://i.imgur.com/Obi9tlp.png){:height="400" width="300"}      
+![](https://i.imgur.com/Obi9tlp.png){:height="400" width="400"}      
 
 
 簡單版：  
@@ -130,10 +130,11 @@ c2 = m2 xor P(k)
 這種類型是安裝了PTK後仍然接受未被加密過的Msg3訊息，MitM直接擋Msg4就可以了。  
 
 ### Encrypted Retransmission of message 3 
-![](https://i.imgur.com/XVrBpcr.png){:height="400" width="300"}![](https://i.imgur.com/SsqOmkR.png){:height="400" width="300"}     
-這種類型是只要STA安裝了PTK就只接受PTK加密過的訊息，如左圖，MitM可以直接攔截Msg3，讓AP發好幾個Msg3，然後再一次丟給STA，STA收到一堆Msg3會排進receive queue，處理第一個Msg3的時候安裝PTK並回傳Msg4，然後處理第二個時又被要求再安裝一次PTK，以此類推。這種方法是利用CPU和NIC的race conditions原理。  
+![](https://i.imgur.com/XVrBpcr.png){:height="400" width="350"}  
+這種類型是只要STA安裝了PTK就只接受PTK加密過的訊息，如上圖，MitM可以直接攔截Msg3，讓AP發好幾個Msg3，然後再一次丟給STA，STA收到一堆Msg3會排進receive queue，處理第一個Msg3的時候安裝PTK並回傳Msg4，然後處理第二個時又被要求再安裝一次PTK，以此類推。這種方法是利用CPU和NIC的race conditions原理。  
 
-右圖是在講nonce的變動，第一個msg3讓STA安裝了PTK，假設此時nonce=0，然後用這個nonce=0去回傳msg4，接著處理第二個，這種只接收加密訊息的系統不會去檢查加密的鑰匙是否對不對，只要有加密就好，第二個msg3用的nonce=1，有加密就收，然後執行裡面帶的指令，是安裝PTK，所以又安裝了一次，nonce歸0，然後回傳msg4，此時nonce++變成1，以此類推，每次都用新的PTK回傳msg4，而且nonce都是1。  
+![](https://i.imgur.com/SsqOmkR.png){:height="400" width="350"}  
+上圖是在講nonce的變動，第一個msg3讓STA安裝了PTK，假設此時nonce=0，然後用這個nonce=0去回傳msg4，接著處理第二個，這種只接收加密訊息的系統不會去檢查加密的鑰匙是否對不對，只要有加密就好，第二個msg3用的nonce=1，有加密就收，然後執行裡面帶的指令，是安裝PTK，所以又安裝了一次，nonce歸0，然後回傳msg4，此時nonce++變成1，以此類推，每次都用新的PTK回傳msg4，而且nonce都是1。  
   
 ### 不怕此種攻擊的案例：PeerKey Handshake 
 **PeerKey**用在STA和STA直接溝通，使用的是**Station-To-Station Link (STSL) Master Key (SMK)**，Re-installation Attack對使用此種方法的設備沒什麼影響，原因在這種Master Key不是用data-confidentiality protocol，代表不會用到nonce和replay counters，但他一樣是使用四向交握的，但因為攻擊者無法控制nonce和replay counters而免疫。  
@@ -142,13 +143,14 @@ c2 = m2 xor P(k)
 ## KRACKs-針對GTK
 要針對GTK攻擊有兩個條件，第一個是STA在重新安裝GTK後會刷新replay counter，第二個是要能攔截到目標STA會收的msg1且裡面已經包含目前AP正在使用的GTK。AP每過一段時間就重新算一個GTK，有的會延後安裝，等到所有STA都安裝好並回傳msg2時才安裝新的GTK。為了讓正在使用的STA這個群體獨立出來，AP會在有STA離開時就更新一次GTK，為的就是只有正在使用的這群用戶共享，因此可以透過假裝要離開的請求騙AP更新GTK。  
 
-![](https://i.imgur.com/Wm7oAsM.png){:height="400" width="300"}![](https://i.imgur.com/OFmQc2D.png){:height="400" width="300"}     
 
 ### Attacking Immediate Key Installation 
-左圖是AP直接安裝GTK的情況，把STA通知完成安裝GTK的msg2攔截，AP重發msg1，一樣把這個msg攔截，此時因為AP不延後安裝，他已經安裝好GTK了，開始廣播他要通知給各STA的資料，STA因為有安裝好GTK，也可以讀到這段資料，然後再把重發的msg1傳給STA，對STA來說他不知道這個msg1是補發的，把它當作AP又要求大家更新GTK，於是用剛才接收到的廣播資訊算出了新的GTK，以此類推可以讓STA重複安裝GTK。  
+![](https://i.imgur.com/Wm7oAsM.png){:height="400" width="350"}  
+此圖是AP直接安裝GTK的情況，把STA通知完成安裝GTK的msg2攔截，AP重發msg1，一樣把這個msg攔截，此時因為AP不延後安裝，他已經安裝好GTK了，開始廣播他要通知給各STA的資料，STA因為有安裝好GTK，也可以讀到這段資料，然後再把重發的msg1傳給STA，對STA來說他不知道這個msg1是補發的，把它當作AP又要求大家更新GTK，於是用剛才接收到的廣播資訊算出了新的GTK，以此類推可以讓STA重複安裝GTK。  
 
 ### Attacking Delayed Key Installation 
-右圖是AP會延後安裝GTK的情況，跟左圖只有一點差別，一樣攔截了STA回傳的msg2，等到AP重新發了安裝GTK的要求時才回傳msg2，AP會無視counter不同這個問題(本來就會考慮網路不穩的狀況，這個無視算合理)，AP確認大家都裝好GTK後自己也安裝新GTK，此時可以開始廣播資料了，等STA收到廣播資料後再把剛剛的補發msg1傳給STA，STA根據最新的廣播資訊算出新的GTK並安裝，以此類推可以讓STA重複安裝GTK。  
+![](https://i.imgur.com/OFmQc2D.png){:height="400" width="350"}     
+此圖是AP會延後安裝GTK的情況，跟左圖只有一點差別，一樣攔截了STA回傳的msg2，等到AP重新發了安裝GTK的要求時才回傳msg2，AP會無視counter不同這個問題(本來就會考慮網路不穩的狀況，這個無視算合理)，AP確認大家都裝好GTK後自己也安裝新GTK，此時可以開始廣播資料了，等STA收到廣播資料後再把剛剛的補發msg1傳給STA，STA根據最新的廣播資訊算出新的GTK並安裝，以此類推可以讓STA重複安裝GTK。  
 
 ### 不怕此種攻擊的案例： OpenBSD AP
 最後作者提到只有**OpenBSD AP**可以免疫這種攻擊，他採用延後安裝GTK且要求counter要對上。  
