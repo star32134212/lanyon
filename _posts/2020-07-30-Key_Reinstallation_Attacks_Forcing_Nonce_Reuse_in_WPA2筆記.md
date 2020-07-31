@@ -203,4 +203,5 @@ TKIP、CCMP和GCMP都是使用[stream cipher](https://zh.wikipedia.org/zh-tw/%E6
 [原論文](https://dl.acm.org/doi/abs/10.1145/3133956.3134027)  
 [WEP](http://www.tsnien.idv.tw/Network_WebBook/chap15/15-5%20%E8%AA%8D%E8%AD%89%E8%88%87%E4%BF%9D%E5%AF%86.html)  
 [四向交握](https://read01.com/zh-tw/00QNOo.html#.XyApRfgzYyl)  
-[四向交握分析與實作](https://kysonlok.gitbook.io/blog/wireless/4_way_handshake#gtk-group-temporal-key)
+[四向交握分析與實作](https://kysonlok.gitbook.io/blog/wireless/4_way_handshake#gtk-group-temporal-key)  
+[演講影片](https://www.ithome.com.tw/video/120594)  
