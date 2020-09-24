@@ -34,7 +34,7 @@ tags:
 另外加入其他類似資料集或匿名法不同的同資料集的資料進行追蹤。  
 
 ## 匿名化效果指標
-#### F-measure
+### F-measure
 >Utility = Fano / Fori
 
 用logistic regression 和 random forests等機器學習方法得到的預期結果F，將匿名和原始資料得到的F相除可以用來評估此匿名化的效果如何  
