@@ -2,6 +2,7 @@
 layout: post
 title: Key Reinstallation Attacks - Forcing Nonce Reuse in WPA2 筆記
 tags: 
+  - "security"
   - "tech"
 ---    
 > 論文作者：Mathy Vanhoef、Frank Piessens  
