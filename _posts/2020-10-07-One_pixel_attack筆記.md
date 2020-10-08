@@ -7,11 +7,13 @@ tags:
 ---    
 作者：Jiawei Su, Danilo Vasconcellos Vargas, Sakurai Kouichi  
 來源：CVPR2017 [paper link](https://arxiv.org/abs/1710.08864)  
-與一般的adversarial attack不同的是adversarial attack要求是整張圖片的修改應小於某個值，one pixels attack則強調只能更動一個像素而沒有強度限制。只更動一個像素且半黑箱攻擊的性質使這種攻擊法在現實世界中的可行性提昇了不少，擾動效果也得到不錯的成績。  
-![](https://i.imgur.com/xJkMuQe.png =300x)  
+與一般的adversarial attack不同的是adversarial attack要求是整張圖片的修改應小於某個值，one pixels attack則強調只能更動一個像素而沒有強度限制。只更動一個像素且半黑箱攻擊的性質使這種攻擊法在現實世界中的可行性提昇了不少，擾動效果也得到不錯的成績。   
+
+
+![](https://i.imgur.com/xJkMuQe.png){:height="400" width="300"}     
 
 下圖為FGSM attack和one pixels attack各自的目標，左邊是限制全局變動不能超過某個值(norm infinite)，右邊是限制用了幾個pixel(norm 0)。  
-![](https://i.imgur.com/qnoVagv.png =500x)  
+![](https://i.imgur.com/qnoVagv.png)  
 
 ### Contribution
 * 提出了多點干擾與多點干擾的極端->單點干擾
@@ -93,11 +95,11 @@ OriginAcc是該模型原本的準確率，因為參數的設定，可能沒有�
 
 ### Heat-maps
 熱點圖表示了原類別變動到特定類別的數量，直排是原類別，橫排是誤判類別，由熱點圖可知對某些類別進行擾動有更高的成功率，且特別容易擾動到某個類別，例如類別5(dog)特別容易擾動到類別3(cat)，作者認為理論上應該要有對稱性，如果貓跟狗長很像，狗很容易誤認為貓，那貓應該也要很容易誤認為狗，大致上是有這樣的跡象，但仍有差很大的例外。  
-![](https://i.imgur.com/gBbCbnZ.png =200x)![](https://i.imgur.com/PWXvE80.png =200x)![](https://i.imgur.com/009hYFX.png =200x)  
+![](https://i.imgur.com/gBbCbnZ.png){:height="200" width="200"}![](https://i.imgur.com/PWXvE80.png){:height="200" width="200"}![](https://i.imgur.com/009hYFX.png){:height="200" width="200"}  
 
 ### Boundary
 以這張熱點圖為例，類別8(ship)變動到類別0(airplane)有32個成功案例，但0變回8卻只有9個，作者認為是可能的因素。  
-![](https://i.imgur.com/toYecnD.png =300x)  
+![](https://i.imgur.com/toYecnD.png){:height="200" width="200"}  
 可能是下面兩個因素：  
 * boundary shape
 * how close are natural images to the border
@@ -106,12 +108,12 @@ OriginAcc是該模型原本的準確率，因為參數的設定，可能沒有�
 
 ### Success Distribution
 另外作者發現，增加pixel擾動數可以讓誤認的類別更多元，下圖可以很好的說明這種現象，對一定數量的圖片做non-targeted attack，模型誤判成的類別分佈：  
-![](https://i.imgur.com/xr8tE6L.png =400x)  
-![](https://i.imgur.com/xY5Book.png =400x)  
-![](https://i.imgur.com/8hzXLow.png =400x)  
+![](https://i.imgur.com/xr8tE6L.png)  
+![](https://i.imgur.com/xY5Book.png)  
+![](https://i.imgur.com/8hzXLow.png)  
 
 另外也有一些有趣的圖片剛好處在決策邊界，例如這隻狗，只要一個pixel，不同位置可以讓他被誤判成各種東西：  
-![](https://i.imgur.com/DnDUMSq.png =300x)![](https://i.imgur.com/HvHfOln.png =300x)  
+![](https://i.imgur.com/DnDUMSq.png){:height="300" width="300"}![](https://i.imgur.com/HvHfOln.png){:height="200" width="300"}  
 
 ### Comparison
 跟其他adversarial attack效果做比較，雖說效果比其他模型差，以只更動一個pixel來說，這個結果已經算不錯了。  
@@ -119,7 +121,7 @@ OriginAcc是該模型原本的準確率，因為參數的設定，可能沒有�
 (LSA是另一種black box，FGSM是white box)  
 ### Success rate and image size
 如果DE規模不變的話，圖片變大成功率會下降，可能是因為單個pixel的影響力就降低了。  
-![](https://i.imgur.com/4k6PJIa.png =100x) ![](https://i.imgur.com/eCCNrDF.png =150x) ![](https://i.imgur.com/zMtVUP5.png =200x)  
+![](https://i.imgur.com/4k6PJIa.png){:height="100" width="100"} ![](https://i.imgur.com/eCCNrDF.png){:height="150" width="150"} ![](https://i.imgur.com/zMtVUP5.png){:height="200" width="200"}  
 
 ### Future Work 
 * 可以套用到其他進化演算法，可能會有更好的效果
