@@ -113,7 +113,8 @@ OriginAcc是該模型原本的準確率，因為參數的設定，可能沒有�
 ![](https://i.imgur.com/8hzXLow.png)  
 
 另外也有一些有趣的圖片剛好處在決策邊界，例如這隻狗，只要一個pixel，不同位置可以讓他被誤判成各種東西：  
-![](https://i.imgur.com/DnDUMSq.png){:height="300" width="300"}![](https://i.imgur.com/HvHfOln.png){:height="100" width="250"}  
+![](https://i.imgur.com/yAMc93e.png)  
+
 
 ### Comparison
 跟其他adversarial attack效果做比較，雖說效果比其他模型差，以只更動一個pixel來說，這個結果已經算不錯了。  
