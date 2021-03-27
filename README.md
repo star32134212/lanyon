@@ -132,4 +132,4 @@ Lanyon has two branches, but only one is used for active development.
 Open sourced under the [MIT license](LICENSE.md).
 
 <3
-[CTF_note](https://hackmd.io/IzWCvez5QTuvqUcs2D-ruA?view)  
+
