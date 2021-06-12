@@ -48,7 +48,7 @@ tags:
 ![](https://i.imgur.com/zWAeyPi.png) 
 
 - N-Club : 要考慮最短路徑小於N，走不到就不算
-![](https://i.imgur.com/ErgcVUI.png)
+![](https://i.imgur.com/ErgcVUI.png){: width="200" }
 3-club and 3-clique: {1,2,3,4,5,6}
 3-clique only: {1,2,3,6}
 **差在能不能走到**
