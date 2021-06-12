@@ -17,9 +17,9 @@ tags:
 ![](https://i.imgur.com/RPgxkfX.png)
     - 如果是有向圖就會分in,out
 - density : 存在的edge / 所有可能的edge，density一般很小，avg degree較常用
-![](https://i.imgur.com/aU9nxfP.png)
+![](https://i.imgur.com/aU9nxfP.png){: width="400" }
 - degree centrality : degree 除以 network中的node數-1 (D/(N-1))
-![](https://i.imgur.com/V9QW61P.png) 
+![](https://i.imgur.com/V9QW61P.png){: width="400" } 
 - walk (路徑) : 一個點到另一個點的路徑，walk長度為經過的edge數
 - closed walk (閉環路徑) : 起點跟終點一樣的路徑
 - cycle : 某張圖有一個closed walk使圖的edge都最多只出現一次
@@ -32,7 +32,7 @@ tags:
 - betweenness : 以k表示，先定義兩點i,j，i到j的所有最短路經中會經過k點的比例，假設有五條最短路經，其中2條有經過k點則為0.4，i,j為所有node組合，算出所有kij再算平均即為k
 - clustering coefficient (集聚係數) : 以C(i)表示node i的任兩個朋友也是朋友的機率
     - 3/C5取2 = 3/10 = 0.
-![](https://i.imgur.com/PLhb2h7.png)
+![](https://i.imgur.com/PLhb2h7.png){: width="400" }
 
 ### 一些理論
 - Triadic Closure Triangle : 如果兩人有共同好友，則兩人之間也很有可能有edge
@@ -41,11 +41,11 @@ tags:
 
 ### Group cohesiveness 凝聚力
 - clique : 任兩個node都有link的subgraph
-![](https://i.imgur.com/4wywqSl.png) 
+![](https://i.imgur.com/4wywqSl.png){: width="400" } 
 - N-clique : 任兩個node之間距離不超過N
 **Small-world experiment**
 與一個完全不認識的人之間大約6條link可以建立連線，所以對一堆node，大概設到6~7 clique就可以包含整張圖了
-![](https://i.imgur.com/zWAeyPi.png) 
+![](https://i.imgur.com/zWAeyPi.png){: width="400" }
 
 - N-Club : 要考慮最短路徑小於N，走不到就不算
 ![](https://i.imgur.com/ErgcVUI.png){: width="200" }
@@ -53,12 +53,12 @@ tags:
 3-clique only: {1,2,3,6}
 **差在能不能走到**
 - quasi-clique : 考慮密度而不是路徑
-![](https://i.imgur.com/Snn2PtV.png) 
+![](https://i.imgur.com/Snn2PtV.png){: width="400" } 
 G1是一個**0.5-quasi-clique**
 G2是一個**0.6-quasi-clique**
 
 - k-plex : 每個node至少要連到n-k個node
-![](https://i.imgur.com/Qx45jO6.png)
+![](https://i.imgur.com/Qx45jO6.png){: width="250" }
 這是一個**3-plex**，因為5個node，每個node有5-3個相鄰node  
 
 **在這以上都是NP complex問題，以下是polynomial time問題**
@@ -70,7 +70,7 @@ G2是一個**0.6-quasi-clique**
 > k-core (1) deg(v) >= k any v
 
 - k-truss : Each edge within a k-truss is contained in at least (k-2) triangles
-![](https://i.imgur.com/b51BtbS.png)
+![](https://i.imgur.com/b51BtbS.png){: width="400" }
 從圖可以看到x2與之相鄰的node無法組出任一個三角形，所以不在3-truss的範圍內，x1可以組成的三角形只有一個，所以不在4-truss的範圍內，所有的node都可以在2-truss的範圍內。
 
 ### 圖的結構
@@ -81,11 +81,11 @@ G2是一個**0.6-quasi-clique**
 
 ### 矩陣
 - Adjacency Matrix (相鄰矩陣) : 用矩陣表示點之間是否有連接，1是有，0是沒有，以A表示
-![](https://i.imgur.com/YQHSRz5.png)
+![](https://i.imgur.com/YQHSRz5.png){: width="400" }
 一些比較特別的例子
-![](https://i.imgur.com/S2bvHXx.png) 
+![](https://i.imgur.com/S2bvHXx.png){: width="400" } 
 實際上資料匯存成的樣子是下面這種**list of edges**
-![](https://i.imgur.com/34MjBna.png) 
+![](https://i.imgur.com/34MjBna.png){: width="400" } 
 - A^k : k個A相乘，會得到一個node到走k步到另一個node有幾種走法的矩陣
 - Degree Matrix (度矩陣) : 以D表示 是一個diagonal matrix對角矩陣，記載每個node的degree在對角線上
 - Laplacian Matrix (拉普拉斯矩陣) : 以L表示 L = D - A，也稱調和矩陣
