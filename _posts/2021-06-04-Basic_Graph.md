@@ -2,7 +2,8 @@
 layout: post
 title: Basic Graph
 tags: 
-  - "graph"
+  - "graph" 
+  - "tech"
 ---
 這篇整理了在讀paper跟看教學影片時遇到的所有專有名詞，有看到新的會持續更新~
 
