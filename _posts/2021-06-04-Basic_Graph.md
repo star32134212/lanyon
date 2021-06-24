@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Basic Graph
+title: Graph 1 - Basic Graph
 tags: 
   - "graph" 
   - "tech"
 ---
-這篇整理了在讀paper跟看教學影片時遇到的所有專有名詞，有看到新的會持續更新~
+這篇整理了在讀Graph paper跟看教學影片時遇到的所有專有名詞，有看到新的會持續更新~
 
 ### 基本名詞
 - graph : G = (V,E)
@@ -32,7 +32,7 @@ tags:
 - betweenness : 以k表示，先定義兩點i,j，i到j的所有最短路經中會經過k點的比例，假設有五條最短路經，其中2條有經過k點則為0.4，i,j為所有node組合，算出所有kij再算平均即為k
 - clustering coefficient (集聚係數) : 以C(i)表示node i的任兩個朋友也是朋友的機率
     - 3/C5取2 = 3/10 = 0.
-![](https://i.imgur.com/PLhb2h7.png){: width="400" }
+![](https://i.imgur.com/PLhb2h7.png){: width="300" }
 
 ### 一些理論
 - Triadic Closure Triangle : 如果兩人有共同好友，則兩人之間也很有可能有edge

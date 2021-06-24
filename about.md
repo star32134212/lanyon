@@ -8,9 +8,9 @@ An Orange from Taiwan.
  
 研究領域：Information Security、Data Analysis、Graph、Adversarial Attack、History  
 喜好興趣：  
-* 卡牌遊戲-ygo、WS
-* 坂道偶像-尤其推日向坂  
-* 棒球-中美日職都看  
+* 卡片遊戲  
+* 棒球 
+* 日本綜藝
 
 
 [home](<{{ site.baseurl }}/>)
