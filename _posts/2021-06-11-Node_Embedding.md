@@ -11,7 +11,7 @@ tags:
 - graph-level : 圖結構，兩個node之間是否有連線
 
 Node Embedding要討論的問題是如何把一個node的特徵map到一個embedding space好讓GNN可以運算。這個ENC就是要用來轉換的encoding function :  
-![](https://i.imgur.com/bGAPUA9.png)  
+![](https://i.imgur.com/bGAPUA9.png){: width="600" }    
 
 ## Encoder + Decoder Framework
 
@@ -24,7 +24,7 @@ Node Embedding要討論的問題是如何把一個node的特徵map到一個embed
 ### Shallow Encoding 
 這個概念是指在算embedding時，會把embedding當成是查表，這種矩陣格式比較好運算及方便儲存。  
 
-![](https://i.imgur.com/VX6ZHoE.png){: width="400" }  
+![](https://i.imgur.com/VX6ZHoE.png){: width="350" }  
 
 Z的每個column都是一個node的embedding，v是indicator，代表特定的一個node，dot後可以得到特定node的embedding。  
 
@@ -45,7 +45,7 @@ encoding / decoding function是trainable function，所以整個framework最重�
 ## Random Walk 
 首先定義 :  
 - z_u是node u的embedding
-- P(v|z_u)是從node u開始random walk，走到v的機率
+- `P(v|z_u)` 是從node u開始random walk，走到v的機率
 - non-linear functions用來算機率，使用Softmax或Sigmoid
 
 接著對於一張Graph，給定node u開始做random walk : 隨機挑一個neighbor，訪問他，然後再從他的neighbor隨機挑一個去訪問，不斷循環。  
@@ -77,7 +77,7 @@ Similarity function定為Random Walk中node u和node v同時出現的機率，�
 ## node2vec
 ### Biased Walk
 關於Walk strategy，以常見的BFS和DFS為例，兩個提供了不同角度的walk方式   
-![](https://i.imgur.com/eeOreDd.png)  
+![](https://i.imgur.com/eeOreDd.png){: width="600" }    
 - BFS提供Local microscopic view 
 - DFS提供Global macroscopic view
 
@@ -86,9 +86,9 @@ Similarity function定為Random Walk中node u和node v同時出現的機率，�
 - return parameters p : 往回走
 - In-out parameters q : 往外走
 
-![](https://i.imgur.com/LmAu666.png)  
+![](https://i.imgur.com/LmAu666.png){: width="600" }  
 
-![](https://i.imgur.com/9sbdvMX.png)  
+![](https://i.imgur.com/9sbdvMX.png){: width="600" }  
 
 給定p q後每走到一個node都可以算出走到所有neighbor的機率，如果會遠離前一個來的地方，就用1/q代替，會靠近就用1/p代替，如果距離不變就用1。右邊是還沒有nomalize的結果，先得到所有的值在normalize，然後照著機率走到下一個node再重複同個步驟。  
 
