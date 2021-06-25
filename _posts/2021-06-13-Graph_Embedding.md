@@ -24,8 +24,9 @@ tags:
 以此規則延伸，下圖為決定Walk步數後可以走出的編號可能數 :   
 ![](https://i.imgur.com/kUhXnZV.png){: width="500" }  
 以3為例，有111,112,121,122,123種組合   
+
 重複走m次random walk可以得到一個anonymous walks的distribution，這個m應該如何訂呢？  
-![](https://i.imgur.com/gmnRCbN.png =350x)  
+![](https://i.imgur.com/gmnRCbN.png){: width="500" }   
 η (eta) 是特定長度的anonymous walks總數，用上面的圖表找到對應，例如l=7時η=877，如果ε(epsilon)設0.1，δ設0.01，則m為122500，代表有走122500次random walks來完成anonymous walks distribution。  
 
 我們用trainable model學習圖的embedding Z_G而不是單個anonymous walk，任務定為預測某個walk是否在一個wondow內發生Co-occurrence，這裏是把每個Anonymous Walks當成單詞，window當成句子，以NLP的角度來看這任務，把所有anonymous walks排列，例如下圖是四個從node 1出發的anonymous walk排列  
@@ -36,7 +37,7 @@ window是指以某個walk前後Δ的範圍，以上圖為例，若定為1，則�
 P的算法是softmax機率  
 ![](https://i.imgur.com/MGHrnfF.png){: width="500" }   
 
-整個網路架構，藉由W1,W2,W3預測W4的Anonynous Walk，然後更新weight :  
+整個網路架構，藉由W1,W2,W3拼成一個陣列，每個W都當成單詞，以Window取得類似句子的資料，預測W4的Anonynous Walk，然後更新weight :  
 ![](https://i.imgur.com/jaTRAyW.png){: width="500" }  
 
 
