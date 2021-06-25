@@ -44,7 +44,7 @@ encoding / decoding function是trainable function，所以整個framework最重�
 
 ## Random Walk 
 首先定義 :  
-- z_u是node u的embedding
+- `z_u` 是node u的embedding
 - `P(v|z_u)` 是從node u開始random walk，走到v的機率
 - non-linear functions用來算機率，使用Softmax或Sigmoid
 
