@@ -96,4 +96,4 @@ Rewire: Introduce randomness (“shortcuts”) :
 ![](https://i.imgur.com/UKWnMcT.png){: width="600" }
 
 ### Conclusion 
-效果非常好，也是常用的方法。
+Kronecker Graph Model效果非常好，也是常用的方法。
