@@ -6,7 +6,7 @@ tags:
   - "tech"
 ---
 
-在真實世界中，Graph Data的取得可能還不那麼容易，因此有人提出了Graph Generative Model，既然Graph不好取得，那就提出一個能生成合理Graph的模型。在驗證自己的某個 Graph model 是否可行時，很常會用以下方法大量產生 Graph 去測試。
+在真實世界中，Graph Data的取得可能還不那麼容易，因此有人提出了Graph Generative Model，既然Graph不好取得，那就提出一個能生成合理Graph的模型。另外，在驗證自己的某個 Graph model 是否可行或某個想法是否正確時，也很常會用以下方法大量產生 Graph 去測試，例如想測試avg degree很高的Graph的效果，比起去找一個符合條件的真實資料，直接生成會比較方便。
 
 要產生一個符合real world的Graph，需要先了解Graph有哪些特性。以下介紹一些名詞定義 : 
 - Degree distribution P(k) : 定義P(k)表示隨機取一個node，得到degree為k的機率，算法就統計各degree的node數N_k，然後都除以總node數N
