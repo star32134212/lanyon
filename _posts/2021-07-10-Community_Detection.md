@@ -21,7 +21,7 @@ Graph 中 edge 又分 Strong 和 Weak ， Strong 的關係大家同質性高，�
 ![](https://i.imgur.com/ewZy7P5.png){: width="300" }
 
 
-![](https://i.imgur.com/icCsbGc.png){: width="450" }
+![](https://i.imgur.com/icCsbGc.png){: width="550" }
 左圖是根據 edge strength 刪除 edge，右圖是根據 overlap 刪除 edge，紅色代表從low刪到high，黑色代表從high刪到low，在刪除edge strength 中，從 edge strength 低的開始刪最大的component 下降的速度較快，因為這通常會刪到跨 community 的 edge ，這種 edge 少導致兩個 community 容易斷開。同理在刪除 overlap 低的更明顯。
 
 ### Community and Modularity Q
@@ -70,7 +70,7 @@ Aij 是 i j 之間 edge 的 attention，後面有一個indicator，ci代表 node
 ![](https://i.imgur.com/w700USf.png){: width="600" }
 
 計算`∆𝑄(i->C)` (`∆𝑄(D->i)`可以遇類似方法算)
-![](https://i.imgur.com/ylWxBTH.png){: width="600" }
+![](https://i.imgur.com/ylWxBTH.png){: width="550" }
 
 不斷重複以上步驟，因為是 greedy 且不做 back check ，所以可能會錯過 optimal ，但優點是速度快。
 
