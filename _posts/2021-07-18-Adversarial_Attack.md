@@ -42,8 +42,8 @@ Adversarial Attack 是一種對 neural network 的攻擊，攻擊方式是對一
 - Add new nodes : 新增一個 node (刪除 node 可以看成是把那個 node 所有 edge 都刪掉)
 
 ### **Graph Adversarial Attack 根據目標是否攻擊 target node 的周遭可以分成兩種**  
-- undirect : 改動的 edge 不能跟 target node 有關，改動的 node 不能是 target 鄰居 
-- direct : 沒限制
+- Influence (indirect) : 改動的 edge 不能跟 target node 有關，改動的 node 不能是 target 鄰居 
+- Direct : 沒限制
 
 ### **其他在 Adversarial Attack 會用到的名詞**
 - budget : 為了讓攻擊不被發現，會做一些限制，用最少的改動來達成效果，在 Image 會注重 noise 的大小，也有不管整體大小，直接限制改動像素數量進行高 noise 攻擊的 [one pixel attack](https://star32134212.github.io/OrangeBlog/2020/10/07/One_pixel_attack%E7%AD%86%E8%A8%98/)，在 Graph 上比較難定義 noise ，目前沒有一個固定的定法，看論文作者怎麼定義，常見的做法是直接計算次數，改邊改點都算一次，不能超過特定次，這個次數會用一些 Graph 整體資訊來定，例如 average degree
