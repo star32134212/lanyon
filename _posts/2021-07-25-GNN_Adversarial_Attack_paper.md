@@ -11,11 +11,11 @@ tags:
     - Pure Semi-supervised Learning : 把Label與Unlabel data都拿去訓練，最後用一開始就分割出得testing data測試模型結果
     - Transductive Learning : 把Label與Unlabel data都拿去訓練，最後預測unlabel data的label (GRAPH 較常用)
 
-![](https://i.imgur.com/8jjsdcp.png)
+![](https://i.imgur.com/8jjsdcp.png){: width="500" }  
 
 - 雙重優化 : Poisoning attack會是雙重優化問題，內層是Max，外層是Min，內層Loss要maximize是因為要讓他對某類的正確率差距越大越好(越難分到正確的類上)，外層Loss要minimize則是因為改了圖後要再train一次，要讓他在這張錯誤的圖上學得好一點(往錯誤的結果學習)
 
-# Gray Box
+## *Gray Box*
 ## **Adversarial Attacks on Neural Networks for Graph Data**
 作者：Daniel Zügner, Amir Akbarnejad, Stephan Günnemann  
 來源：KDD2018 [paper link](https://arxiv.org/abs/1805.07984)  
@@ -53,7 +53,7 @@ code : [github](https://github.com/danielzuegner/nettack)
 - untargeted attack
 - 利用增加node來攻擊而不是加邊減邊
 
-# White Box
+## *White Box*
 ## **Adversarial Examples on Graph Data: Deep Insights into Attack and Defense**
 作者：Huijun Wu, Chen Wang, Yuriy Tyshetskiy, Andrew Docherty, Kai Lu, Liming Zhu  
 發表：IJCAI'19 March, 2019 [paper link](https://arxiv.org/abs/1903.01610)  
@@ -78,7 +78,7 @@ xi是終點、xi'是起點，相減後乘以總面積
 - 防禦方法：事先去看整個Graph，若兩個node相似度太低的話就先砍掉再去訓練，論文用的相似度指標是**Jaccard Similarity**
 ### Integrated gradient 積分梯度
 假設今天有個大象辨識模型，鼻子長度越長越有可能是大象，但當長度到了某個程度，斜率變化就幾乎為0了，離如圖中的長度 1 m，之後斜率就幾乎不會增加了(趨近0)，這塊區域是梯度飽和區，但長度為 2 m 應該要比 1 m 更像大象，所以積分梯度被提出，改以積分來表示機率(累積機率面積/總面積)  
-![](https://i.imgur.com/wAW6r7M.png){: width="450" }  
+![](https://i.imgur.com/wAW6r7M.png){: width="550" }  
 
 ## **Topology Attack and Defense for Graph Neural Networks: An Optimization Perspective**
 作者：Kaidi Xu, Hongge Chen, Sijia Liu, Pin-Yu Chen, Tsui-Wei Weng, Mingyi Hong, Xue Lin  
@@ -91,12 +91,12 @@ xi是終點、xi'是起點，相減後乘以總面積
 
 ### Projected gradient
 因為會有預算限制，假設限制要在綠色區域內，從x_k算Gradient得到最好的結果更新到綠色區域外，那就找Project讓更新的點最靠近最佳點且在綠色區域內  
-![](https://i.imgur.com/uFe4dJL.png){: width="450" }  
+![](https://i.imgur.com/uFe4dJL.png){: width="300" }  
 
 Adversarial是雙重優化問題：PGD用在外層的gradient，內層用gradient ascent  
-![](https://i.imgur.com/92BtBI3.png){: width="450" }  
+![](https://i.imgur.com/92BtBI3.png){: width="300" }  
 
-# Black Box
+## *Black Box*
 ## **Adversarial Attacks on Node Embeddings via Graph Poisoning**
 作者：A Bojchevski, S Günnemann  
 發表：2019 [paper link](http://proceedings.mlr.press/v97/bojchevski19a.html)  
@@ -110,7 +110,7 @@ Adversarial是雙重優化問題：PGD用在外層的gradient，內層用gradien
 
 ### Random walk based embeddings
 假設有一張圖，在上面多次random walks會sample好幾種node組合，去觀察這些node組合可以知道有哪些node常常一起出現，代表他們是相近的點。
-![](https://i.imgur.com/ktLGbfB.png){: width="450" }  
+![](https://i.imgur.com/ktLGbfB.png){: width="500" }  
 
 ### 雙層優化轉單層優化
 ![](https://i.imgur.com/Kn4wWnO.png){: width="450" }  
@@ -138,8 +138,8 @@ Adversarial是雙重優化問題：PGD用在外層的gradient，內層用gradien
 ![](https://i.imgur.com/5aAGAK6.png){: width="450" }  
 - 比黑箱更黑箱，假設連 training label 都沒有
 - 因為 random walk 是不用 label 的，所以要靠 random walk
-![](https://i.imgur.com/ZyYct20.png){: width="450" }  
+![](https://i.imgur.com/ZyYct20.png){: width="550" }  
 - 紅色是 walk 的起點，顏色越接近紅色代表對起點的影響度越大，以此來連結 random walk 和 GCN
 - ML 是走了 L 次後，random walk 的 transition matrix，這個式子代表走到 node I 的機率，我們無法知道 node 的 label，但可以知道某個點被走到的機率大不大，以此來預期攻擊這個點可以得到比較好的結果
-![](https://i.imgur.com/5h6pJy4.png){: width="450" }  
+![](https://i.imgur.com/5h6pJy4.png){: width="250" }  
 - 論文中把某個點的重要性用 Random Walk Column Sum(RWCS 視為他的分數)表示，攻擊的點就選分數高的
